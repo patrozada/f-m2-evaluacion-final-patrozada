@@ -1,6 +1,18 @@
-body {
-  background: url("../images/logo-adalab-80px.png") center center no-repeat #f3f4f5;
-  height: 100vh;
+*,*::after,*::before {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page__sections {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.page__main {
+  border: 1px solid grey;
+  width: 70%;
 }
 
 /*# sourceMappingURL=main.css.map */
