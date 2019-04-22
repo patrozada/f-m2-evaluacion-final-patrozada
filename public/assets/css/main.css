@@ -15,4 +15,12 @@
   width: 70%;
 }
 
+.search__output {
+  border: 1px solid blue;
+}
+
+.search__output .img {
+  border: 1px solid green;
+}
+
 /*# sourceMappingURL=main.css.map */
