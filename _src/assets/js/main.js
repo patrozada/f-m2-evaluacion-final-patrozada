@@ -12,16 +12,23 @@ function handleButtonClick(e){
     .then(response=>response.json())
     .then(showsArr=>{
       for(const show of showsArr){
-        console.log(`${show.show.image.medium}`);
+        const imgSrcMedium = `${show.show.image.medium}`
+        const imgSrcPh = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+        const showName =`${show.show.name}`
         const newItem = document.createElement('li');
         const newP = document.createElement('p');
-        const newContent = document.createTextNode(`${show.show.name}`);
+        const newContent = document.createTextNode(showName);
         const newImg = document.createElement('img');
-        newImg.setAttribute('src', `${show.show.image.medium}`);
         newP.appendChild(newContent);
         newItem.appendChild(newP);
         newItem.appendChild(newImg);
         listEl.appendChild(newItem);
+        newImg.setAttribute('alt', showName +' image');
+        if(imgSrcMedium){
+          newImg.setAttribute('src', imgSrcMedium);
+        }else{
+          newImg.setAttribute(imgSrcPh);
+        }
       }
     })
     .catch(error=> console.error(`Ha sucedido un error: ${error}`));
