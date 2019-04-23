@@ -6,7 +6,17 @@ const listEl = document.querySelector('.search__output');
 const favListEl = document.querySelector('.fav__list');
 const favArr = [];
 const resultsArr = [];
-
+const addToCache = function(){
+  localStorage.setItem('fav',favArr);
+};
+function handleCache(){
+  const cacheObj = localStorage.getItem(JSON.parse('fav'));
+  if(cacheObj){
+    favListEl.appendChild(cacheObj);
+  }else{
+    addToCache();
+  }
+}
 const displayFav = function(){
   for (const fav of favArr){
     favListEl.appendChild(fav);
@@ -36,6 +46,7 @@ const displayResponse = function(showsArr){
       addToFav();
       displayFav();
       swapColors();
+      addToCache();
     };
     newItem.addEventListener('click', handleItemClick);
     newImg.setAttribute('alt', showName +' image');
