@@ -5,7 +5,7 @@ const buttonEl = document.querySelector('.btn');
 const listEl = document.querySelector('.search__output');
 
 const displayResponse = function(showsArr){
-  for(const show of showsArr){    
+  for(const show of showsArr){
     const itemArr =[];
     const imgObj =`${show.show.image}`;
     const imgSrcPh = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
