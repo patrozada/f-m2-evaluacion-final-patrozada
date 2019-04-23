@@ -9,12 +9,26 @@
     </head>
     
     <body>
-        <div class="page">
-            <header class="page__header">miau</header>
-            <main class="page__main">guau</main>
-             <h1>pio</h1>
+        <header class="page__header">
+             <h1 class="page__title">Buscador de series</h1>
 
+        </header>
+        <div class="page__sections">
+            <main class="page__main">
+                <form class="search__bar">
+                    <label for="show__title"></label>
+                    <input type="text" name="search__bar" id="show__title">
+                    <button class="btn" type="button">Buscar</button>
+                </form>
+                <ol class="search__output result__style"></ol>
+            </main>
+            <section class="favourites__side">
+                 <h2 class="fav__title">Favoritos</h2>
+
+                <ol class="fav__list result__style"></ol>
+            </section>
         </div>
+        <script src="assets/js/main.js" type="text/javascript"></script>
     </body>
 
 </html>
