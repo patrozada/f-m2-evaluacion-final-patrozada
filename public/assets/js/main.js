@@ -9,14 +9,7 @@ const resultsArr = [];
 const addToCache = function(){
   localStorage.setItem('fav',favArr);
 };
-function handleCache(){
-  const cacheObj = localStorage.getItem(JSON.parse('fav'));
-  if(cacheObj){
-    favListEl.appendChild(cacheObj);
-  }else{
-    addToCache();
-  }
-}
+
 const displayFav = function(){
   for (const fav of favArr){
     favListEl.appendChild(fav);
@@ -43,11 +36,12 @@ const displayResponse = function(showsArr){
       favArr.push(newItem);
     };
     const handleItemClick = function (){
+      swapColors();
       addToFav();
       displayFav();
-      swapColors();
       addToCache();
     };
+
     newItem.addEventListener('click', handleItemClick);
     newImg.setAttribute('alt', showName +' image');
     if(imgObj === 'null'){
@@ -60,7 +54,6 @@ const displayResponse = function(showsArr){
     resultsArr.push(newItem);
   }
 };
-// const removePreviousSearch = function()
 
 function handleButtonClick(e){
   e.preventDefault();
