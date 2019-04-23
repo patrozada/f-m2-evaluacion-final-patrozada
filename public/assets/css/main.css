@@ -25,7 +25,6 @@ body {
 }
 
 .page__main {
-  border: 1px solid grey;
   width: 70%;
   display: -webkit-box;
   display: -ms-flexbox;
