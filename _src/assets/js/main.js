@@ -6,10 +6,10 @@ const listEl = document.querySelector('.search__output');
 const favListEl = document.querySelector('.fav__list');
 const favArr = [];
 const resultsArr = [];
+
 const addToCache = function(){
   localStorage.setItem('fav',favArr);
 };
-
 const displayFav = function(){
   for (const fav of favArr){
     favListEl.appendChild(fav);
@@ -29,7 +29,7 @@ const displayResponse = function(showsArr){
     newItem.appendChild(newImg);
     listEl.appendChild(newItem);
 
-    const swapColors = function(){
+    const swapColors = function(){//I'm aware this is not working as expected because it's inside the for loop, I'm trying to fix it in another branch.
       newItem.classList.toggle('swap__style');
     };
     const addToFav = function(){
@@ -63,5 +63,4 @@ function handleButtonClick(e){
     .then(displayResponse)
     .catch(error=> console.error(`Ha sucedido un error: ${error}`));
 }
-console.log(resultsArr, favArr);
 buttonEl.addEventListener('click', handleButtonClick);
