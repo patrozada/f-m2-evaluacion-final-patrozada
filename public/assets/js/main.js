@@ -7,14 +7,7 @@ const favListEl = document.querySelector('.fav__list');
 const favArr = [];
 const resultsArr = [];
 
-const addToCache = function(){
-  localStorage.setItem('fav',favArr);
-};
-const displayFav = function(){
-  for (const fav of favArr){
-    favListEl.appendChild(fav);
-  }
-};
+
 const displayResponse = function(showsArr){
   for(const show of showsArr){
     const imgObj =`${show.show.image}`;
@@ -29,17 +22,8 @@ const displayResponse = function(showsArr){
     newItem.appendChild(newImg);
     listEl.appendChild(newItem);
 
-    const swapColors = function(){//I'm aware this is not working as expected because it's inside the for loop, I'm trying to fix it in another branch.
-      newItem.classList.toggle('swap__style');
-    };
-    const addToFav = function(){
-      favArr.push(newItem);
-    };
     const handleItemClick = function (){
-      swapColors();
-      addToFav();
-      displayFav();
-      addToCache();
+      newItem.classList.toggle('swap__style');
     };
 
     newItem.addEventListener('click', handleItemClick);
@@ -50,18 +34,44 @@ const displayResponse = function(showsArr){
       const imgSrcMedium = `${show.show.image.medium}`;
       newImg.setAttribute('src', imgSrcMedium);
     }
-    newItem.setAttribute('tabIndex', 0);
     resultsArr.push(newItem);
   }
+  console.log(resultsArr);
 };
+
 
 function handleButtonClick(e){
   e.preventDefault();
   const inputValue = inputEl.value;
-  fetch(`http://api.tvmaze.com/search/shows?q=${inputValue}`)
-    .then(response=>response.json())
-    .then(displayResponse)
-    .catch(error=> console.error(`Ha sucedido un error: ${error}`));
+  if (resultsArr.length !==0){
+    while (listEl.firstChild){
+      listEl.removeChild(listEl.firstChild);
+    }
+    fetch(`http://api.tvmaze.com/search/shows?q=${inputValue}`)
+      .then(response=>response.json())
+      .then(displayResponse)
+      .catch(error=> console.error(`Ha sucedido un error: ${error}`));
+  }else{
+    fetch(`http://api.tvmaze.com/search/shows?q=${inputValue}`)
+      .then(response=>response.json())
+      .then(displayResponse)
+      .catch(error=> console.error(`Ha sucedido un error: ${error}`));
+  }
 }
 buttonEl.addEventListener('click', handleButtonClick);
+
+function handleListClick(){
+  for(const item of resultsArr){
+    if (item.classList.contains('swap__style')){
+      const dupItem = item.cloneNode(true);
+      console.log(dupItem.id);
+      favArr.push(dupItem);
+    }
+  }
+  for (const fav of favArr){
+    favListEl.appendChild(fav);
+  } 
+}
+
+listEl.addEventListener('click', handleListClick);
 //# sourceMappingURL=main.js.map
