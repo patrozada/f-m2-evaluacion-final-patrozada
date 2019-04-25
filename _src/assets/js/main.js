@@ -4,6 +4,7 @@ const inputEl = document.getElementById('show__title');
 const buttonEl = document.querySelector('.btn');
 const listEl = document.querySelector('.search__output');
 const favListEl = document.querySelector('.fav__list');
+const buttonLogEl = document.querySelector('.log');
 const favArr = [];
 const resultsArr = [];
 
@@ -18,14 +19,21 @@ const displayFav = function(){
 const displayResponse = function(showsArr){
   for(const show of showsArr){
     const imgObj =`${show.show.image}`;
+    const timeShow = show.show.schedule.time;
     const imgSrcPh = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
     const showName =`${show.show.name}`;
     const newItem = document.createElement('li');
     const newP = document.createElement('p');
+    const timeP = document.createElement('p');
+    const timeContent = document.createTextNode(timeShow);
     const newContent = document.createTextNode(showName);
     const newImg = document.createElement('img');
+    newP.setAttribute('class', 'title');
     newP.appendChild(newContent);
+    newItem.setAttribute('class', 'card');
     newItem.appendChild(newP);
+    newItem.appendChild(timeP);
+    timeP.appendChild(timeContent);
     newItem.appendChild(newImg);
     listEl.appendChild(newItem);
 
@@ -64,3 +72,11 @@ function handleButtonClick(e){
     .catch(error=> console.error(`Ha sucedido un error: ${error}`));
 }
 buttonEl.addEventListener('click', handleButtonClick);
+function handleLogButton(){
+  const cardElArr =  document.querySelectorAll('.card');
+  for (const card of cardElArr){
+    const title = card.querySelector('.title');
+    console.log(title.innerHTML);
+  }
+}
+buttonLogEl.addEventListener('click',handleLogButton);
